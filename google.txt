@@ -3,35 +3,22 @@ Library    Selenium2Library
 
 
 *** Variables ***
-
+${WEB GOOGLE}    http://www.google.co.th
+${SEARCH TXT BOX}   lst-ib
+${SEARCH BUTTON}   btnG
 
 *** Testcases ***
 ทดสอบค้าหาคำว่า สวนสุนันทา
-    Open Browser    http://www.google.co.th
-    Input Text    lst-ib    สวนสุนันทา
-    Click Button    btnG
-    Wait Until Page Contains    มหาวิทยาลัยราชภัฏสวนสุนันทา
-    Close Browser
-
-ทดสอบค้าหาคำว่า สุนันทา
-    Open Browser    http://www.google.co.th
-    Input Text    lst-ib    สุนันทา
-    Click Button    btnG
-    Wait Until Page Contains    มหาวิทยาลัยราชภัฏสวนสุนันทา
-    Close Browser
-
-ทดสอบค้าหาคำว่า SSRU
-    Open Browser    http://www.google.co.th
-    Input Text    lst-ib    SSRU
-    Click Button    btnG
-    Wait Until Page Contains    มหาวิทยาลัยราชภัฏสวนสุนันทา
-    Close Browser
-
-ทดสอบค้าหาคำว่า อู่ทองนอก
-    Open Browser    http://www.google.co.th
-    Input Text    lst-ib    อู่ทองนอก
-    Click Button    btnG
-    Wait Until Page Contains    มหาวิทยาลัยราชภัฏสวนสุนันทา
-    Close Browser
+    [Template]    Test Search Google
+    สวนสุนันทา    มหาวิทยาลัยราชภัฏสวนสุนันทา
+    สุนันทา    มหาวิทยาลัยราชภัฏสวนสุนันทา
+    SSRU    มหาวิทยาลัยราชภัฏสวนสุนันทา
 
 *** Keywords ***
+Test Search Google
+    [Arguments]    ${INPUT}    ${EXPECTED RESULT}
+    Open Browser    ${WEB GOOGLE}
+    Input Text    ${SEARCH TXT BOX}    ${INPUT}
+    Click Button    ${SEARCH BUTTON}
+    Wait Until Page Contains    ${EXPECTED RESULT}
+    Close Browser
